@@ -1,8 +1,10 @@
 import { BookIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
+import { de } from 'date-fns/locale'
 import { defineField, defineType } from 'sanity'
 
 import authorType from './author'
+import categoryType from './category'
 
 /**
  * This file is the schema definition for a post.
@@ -69,6 +71,34 @@ export default defineType({
       title: 'Author',
       type: 'reference',
       to: [{ type: authorType.name }],
+    }),
+    defineField({
+      name: 'published',
+      title: 'Published',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'main',
+      title: 'Main',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [
+        {
+          type: categoryType.name,
+        },
+      ],
     }),
   ],
   preview: {
