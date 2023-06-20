@@ -57,9 +57,6 @@ export default defineType({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
     }),
     defineField({
       name: 'date',

@@ -28,9 +28,6 @@ export default defineType({
       title: 'Image',
       name: 'image',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
     },
     {
       title: 'Hex Code',
