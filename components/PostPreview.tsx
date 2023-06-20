@@ -11,6 +11,7 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
+  category,
 }: Omit<Post, '_id'>) {
   return (
     <div>
@@ -29,6 +30,7 @@ export default function PostPreview({
       </h3>
       <div className="mb-4 text-lg">
         <Date dateString={date} />
+        {category && <span className="text-gray-600"> | {category.title}</span>}
       </div>
       {excerpt && <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>}
       {author && <Avatar name={author.name} picture={author.picture} />}
