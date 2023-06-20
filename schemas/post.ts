@@ -5,6 +5,7 @@ import { defineField, defineType } from 'sanity'
 
 import authorType from './author'
 import categoryType from './category'
+import productType from './product'
 
 /**
  * This file is the schema definition for a post.
@@ -91,14 +92,17 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
-      name: 'category',
-      title: 'Category',
-      type: 'reference',
-      to: [
-        {
-          type: categoryType.name,
-        },
-      ],
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: categoryType.name }] }],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'products',
+      title: 'Products',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: productType.name }] }],
     }),
   ],
   preview: {
