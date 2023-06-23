@@ -7,12 +7,12 @@ export default defineType({
   icon: OlistIcon,
   type: 'document',
   fields: [
-    {
+    defineField({
       title: 'Title',
       name: 'title',
       type: 'string',
-    },
-    {
+    }),
+    defineField({
       title: 'Slug',
       name: 'slug',
       type: 'slug',
@@ -20,21 +20,21 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
-    },
-    {
+    }),
+    defineField({
       title: 'Description',
       name: 'description',
       type: 'text',
-    },
-    {
+    }),
+    defineField({
       title: 'Image',
       name: 'image',
       type: 'image',
-    },
-    {
+    }),
+    defineField({
       title: 'Hex Code',
       name: 'hexCode',
       type: 'string',
-    },
+    }),
   ],
 })

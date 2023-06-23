@@ -1,7 +1,7 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
-import { getAllPosts, getSettings } from 'lib/sanity.client'
-import { Post, Settings } from 'lib/sanity.queries'
+import { getAllCategories, getAllPosts, getSettings } from 'lib/sanity.client'
+import { Category, Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
 
@@ -10,6 +10,7 @@ const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 interface PageProps {
   posts: Post[]
   settings: Settings
+  categories: Category[]
   preview: boolean
   token: string | null
 }
@@ -23,13 +24,19 @@ interface PreviewData {
 }
 
 export default function Page(props: PageProps) {
-  const { posts, settings, preview, token } = props
+  const { posts, settings, preview, token, categories } = props
 
   if (preview) {
     return (
       <PreviewSuspense
         fallback={
-          <IndexPage loading preview posts={posts} settings={settings} />
+          <IndexPage
+            loading
+            preview
+            posts={posts}
+            settings={settings}
+            categories={categories}
+          />
         }
       >
         <PreviewIndexPage token={token} />
@@ -37,7 +44,7 @@ export default function Page(props: PageProps) {
     )
   }
 
-  return <IndexPage posts={posts} settings={settings} />
+  return <IndexPage posts={posts} settings={settings} categories={categories} />
 }
 
 export const getStaticProps: GetStaticProps<
@@ -47,15 +54,17 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
   const { preview = false, previewData = {} } = ctx
 
-  const [settings, posts = []] = await Promise.all([
+  const [settings, posts = [], categories = []] = await Promise.all([
     getSettings(),
     getAllPosts(),
+    getAllCategories(),
   ])
 
   return {
     props: {
       posts,
       settings,
+      categories,
       preview,
       token: previewData.token ?? null,
     },

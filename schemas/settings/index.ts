@@ -73,5 +73,13 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'etsy',
+      title: 'Etsy',
+      description: 'Your Etsy shop URL.',
+      type: 'string',
+      initialValue: demo.title,
+      validation: (rule) => rule.required(),
+    }),
   ],
 })

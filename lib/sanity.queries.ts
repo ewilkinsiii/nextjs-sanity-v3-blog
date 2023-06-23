@@ -11,12 +11,35 @@ const postFields = groq`
   "category": category->{title, image, hexCode, slug, description},
 `
 
+const categoryFields = groq`
+  _id,
+ title, 
+ image, 
+ hexCode, 
+ slug, 
+ description
+`
+
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const indexQuery = groq`
 *[_type == "post"] | order(date desc, _updatedAt desc) {
   ${postFields}
 }`
+
+export const categoryQuery = groq`{
+  "categoryList": *[_type == "category"]
+}`
+
+export const postSlugsQuery = groq`
+*[_type == "post" && defined(slug.current)][].slug.current
+`
+
+export const postBySlugQuery = groq`
+*[_type == "post" && slug.current == $slug][0] {
+  ${postFields}
+}
+`
 
 export const postAndMoreStoriesQuery = groq`
 {
@@ -29,16 +52,6 @@ export const postAndMoreStoriesQuery = groq`
     ${postFields}
   }
 }`
-
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
-`
-
-export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
-  ${postFields}
-}
-`
 
 export interface Author {
   name?: string
@@ -66,6 +79,7 @@ export interface Post {
 }
 
 export interface Settings {
+  etsy: any
   title?: string
   description?: any[]
   ogImage?: {

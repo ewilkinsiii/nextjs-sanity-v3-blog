@@ -3,19 +3,21 @@ import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
 import Footer from 'components/Footer'
 import MoreStories from 'components/MoreStories'
+import NavBar from 'components/NavBar'
 import PostBody from 'components/PostBody'
 import PostHeader from 'components/PostHeader'
 import PostPageHead from 'components/PostPageHead'
 import PostTitle from 'components/PostTitle'
 import SectionSeparator from 'components/SectionSeparator'
 import * as demo from 'lib/demo.data'
-import type { Post, Settings } from 'lib/sanity.queries'
+import type { Category, Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 
 export interface PostPageProps {
   preview?: boolean
   loading?: boolean
   post: Post
+  categories: Category[]
   morePosts: Post[]
   settings: Settings
 }
@@ -23,22 +25,31 @@ export interface PostPageProps {
 const NO_POSTS: Post[] = []
 
 export default function PostPage(props: PostPageProps) {
-  const { preview, loading, morePosts = NO_POSTS, post, settings } = props
+  const {
+    preview,
+    loading,
+    morePosts = NO_POSTS,
+    post,
+    settings,
+    categories,
+  } = props
   const { title = demo.title } = settings || {}
-
+  console.log(settings)
   const slug = post?.slug
 
   if (!slug && !preview) {
     notFound()
   }
 
+  console.log(categories)
+
   return (
     <>
-      <PostPageHead settings={settings} post={post} />
+      <NavBar title={title} categories={[]} />
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <BlogHeader title={title} level={2} />
+          <br />
           {preview && !post ? (
             <PostTitle>Loading…</PostTitle>
           ) : (

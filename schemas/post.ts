@@ -47,16 +47,19 @@ export default defineType({
       title: 'Content',
       type: 'array',
       of: [{ type: 'block' }],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'date',
