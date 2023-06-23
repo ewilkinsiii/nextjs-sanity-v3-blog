@@ -1,3 +1,4 @@
+import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 import categoryType from './category'
@@ -5,6 +6,7 @@ import categoryType from './category'
 export default defineType({
   name: 'product',
   title: 'Product',
+  icon: PackageIcon,
   type: 'document',
   fields: [
     defineField({
