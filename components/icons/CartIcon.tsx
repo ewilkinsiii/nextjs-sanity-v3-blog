@@ -6,7 +6,7 @@ function CartIcon() {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="inline-block h-5 w-6"
+      className="inline-block h-5 w-6"
     >
       <path
         stroke-linecap="round"
