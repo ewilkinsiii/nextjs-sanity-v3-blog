@@ -28,7 +28,7 @@ export default function IndexPage(props: IndexPageProps) {
       <IndexPageHead settings={settings} />
 
       <Layout preview={preview} loading={loading}>
-        <NavBar title={title} categories={categories.categoryList} />
+        <NavBar title={title} categories={categories} />
         <Container>
           <Hero
             title={heroPost.title}
