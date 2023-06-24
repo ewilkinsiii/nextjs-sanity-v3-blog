@@ -145,7 +145,7 @@ export default function Example({ title }) {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...categories, ...callsToAction].map((item) => (
+                        {[...callsToAction].map((item) => (
                           <Disclosure.Button
                             key={item.name}
                             as="a"

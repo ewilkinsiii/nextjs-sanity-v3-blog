@@ -79,7 +79,7 @@ export interface Post {
 }
 
 export interface Settings {
-  etsy: any
+  etsy?: string
   title?: string
   description?: any[]
   ogImage?: {
