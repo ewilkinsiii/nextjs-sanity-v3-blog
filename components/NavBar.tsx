@@ -59,9 +59,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example({ title, categories }) {
+export default function Example({ title }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  console.log(categories)
 
   return (
     <header className="bg-white shadow-lg">

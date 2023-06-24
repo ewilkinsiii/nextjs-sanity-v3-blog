@@ -10,14 +10,13 @@ import PostPageHead from 'components/PostPageHead'
 import PostTitle from 'components/PostTitle'
 import SectionSeparator from 'components/SectionSeparator'
 import * as demo from 'lib/demo.data'
-import type { Category, Post, Settings } from 'lib/sanity.queries'
+import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 
 export interface PostPageProps {
   preview?: boolean
   loading?: boolean
   post: Post
-  categories: Category[]
   morePosts: Post[]
   settings: Settings
 }
@@ -25,14 +24,7 @@ export interface PostPageProps {
 const NO_POSTS: Post[] = []
 
 export default function PostPage(props: PostPageProps) {
-  const {
-    preview,
-    loading,
-    morePosts = NO_POSTS,
-    post,
-    settings,
-    categories,
-  } = props
+  const { preview, loading, morePosts = NO_POSTS, post, settings } = props
   const { title = demo.title } = settings || {}
   console.log(settings)
   const slug = post?.slug
@@ -41,11 +33,9 @@ export default function PostPage(props: PostPageProps) {
     notFound()
   }
 
-  console.log(categories)
-
   return (
     <>
-      <NavBar title={title} categories={[]} />
+      <NavBar title={title} />
 
       <Layout preview={preview} loading={loading}>
         <Container>
